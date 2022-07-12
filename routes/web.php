@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,6 +15,11 @@ use Inertia\Inertia;
 |
 */
 
+// public routes
 Route::get('/', function () {
     return Inertia::render('Home');
 });
+
+// auth routes
+Route::get('register', [AuthController::class, 'create'])->name('auth.register');
+//Route::post('register', [RegisterController::class, 'store']);
