@@ -18,8 +18,10 @@ use Inertia\Inertia;
 // public routes
 Route::get('/', function () {
     return Inertia::render('Home');
-});
+})->name('homepage');
 
 // auth routes
-Route::get('register', [AuthController::class, 'create'])->name('auth.register');
+Route::get('register', [AuthController::class, 'show_register'])->name('auth.register');
+Route::get('login', [AuthController::class, 'show_login'])->name('auth.login');
+
 //Route::post('register', [RegisterController::class, 'store']);
