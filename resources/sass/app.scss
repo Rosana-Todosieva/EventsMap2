@@ -32,8 +32,9 @@ $font-family-base: 'TT Commons';
     content: "";
     display: block;
     width: 40%;
-    border-bottom: 2px solid #4556d6;
+    border-bottom: 2px solid cornflowerblue;
     margin-left: auto;
+    box-shadow: 2px 2px lightblue;
 }
 
 .border-radius-20px {
