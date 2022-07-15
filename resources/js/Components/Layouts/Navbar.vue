@@ -17,7 +17,31 @@
                         <div class="custom-border-bottom">Creators</div>
                     </Link>
 <!--                    v-if (user)-->
-                    <div class="d-flex align-items-center justify-content-around mb-4 mb-md-0 mt-3 mt-md-0">
+                    <div v-if="user" class="d-flex align-items-center justify-content-center mb-4 mb-md-0 mt-3 mt-md-0 ">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle fs-5 text-dark" type="button" id="dropdownMenuButton2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://i.ibb.co/tqJ38n3/user.png" alt="user" width="32" height="32"
+                                     class="rounded rounded-circle me-1">
+                                {{ user.name }}
+                            </button>
+                            <ul class="dropdown-menu end-0 " aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <Link class="dropdown-item fs-6">
+                                        <i class="fa fa-user"></i>
+                                        My Profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link method="post" :href="route('logout')" as="button" type="button" class="dropdown-item fs-6">
+                                        <i class="fa fa-sign-out"></i>
+                                        Log Out
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div v-else class="d-flex align-items-center justify-content-around mb-4 mb-md-0 mt-3 mt-md-0">
                         <Link :href="route('auth.login')" class="d-flex text-nowrap me-3 me-xl-4 fs-5 text-decoration-none text-dark">
                             <div class="custom-border-bottom">Login</div>
                         </Link>
@@ -26,7 +50,6 @@
                         </Link>
                     </div>
                 </div>
-
             </div>
         </nav>
     </div>
@@ -34,7 +57,12 @@
 
 <script>
 export default {
-    name: "Header"
+    name: "Header",
+    computed: {
+        user() {
+            return this.$page.props.user;
+        }
+    },
 }
 </script>
 

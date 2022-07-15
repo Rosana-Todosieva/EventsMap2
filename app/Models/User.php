@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const PERSON = "person";
+    const CREATOR = "creator";
+
+    const types = [self::PERSON, self::CREATOR];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +24,10 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone',
         'email',
         'password',
+        'type'
     ];
 
     /**
