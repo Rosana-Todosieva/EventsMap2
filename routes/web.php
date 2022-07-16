@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +16,7 @@ use Inertia\Inertia;
 */
 
 // public routes
-Route::get('/', function () {
-    return Inertia::render('Home');
-})->name('homepage');
+Route::get('/',[HomeController::class, "homepage"])->name('homepage');
 
 // auth routes
 Route::middleware('guest')->group(function () {

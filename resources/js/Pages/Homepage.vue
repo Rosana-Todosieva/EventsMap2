@@ -7,7 +7,7 @@
 <script>
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 export default {
-    name: "Home",
+    name: "Homepage",
     layout: DefaultLayout,
 }
 </script>

@@ -1,28 +1,31 @@
 <template>
     <div class="row px-5 my-5">
-        <div class="col 3"></div>
-        <div class="container col col-6 px-5 border-radius-20px background-white" style="box-shadow: 5px 5px 5px lightblue;">
+        <div class="col col-3"></div>
+        <div class="container col col-6 px-5 border-radius-20px background-white"
+             style="box-shadow: 5px 5px 5px lightblue;">
             <div class="d-flex justify-content-center py-5">
                 <div class="display-6 d-inline-block custom-border-bottom">
                     Најави се
                 </div>
             </div>
-            <div>
-                <form @submit.prevent="submit">
-                    <BaseInput v-model:value="form.email" label="Е-маил" type="email" :name="'email' + whiteLabel"
+            <form @submit.prevent="submit">
+                <BaseInput v-model:value="form.email" label="Е-маил" type="email" :name="'email' + whiteLabel"
                            :white-label="whiteLabel" :error="form.errors.email" class="mb-3"/>
-                    <BaseInput v-model:value="form.password" label="Лозинка" type="password" :white-label="whiteLabel"
+                <BaseInput v-model:value="form.password" label="Лозинка" type="password" :white-label="whiteLabel"
                            :name="'password' + whiteLabel" :error="form.errors.password" class="mb-3"/>
-                    <div class="text-danger text-center" v-if="form.errors.credentials">{{ form.errors.credentials }}</div>
-                    <div class="text-end mb-4">
-                        <Link class="text-primary fs-6 text-decoration-none">{{ 'Ја заборавивте лозинката?' }}</Link>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary text-white rounded rounded-pill px-5 py-3 mb-4"
-                                :disabled="form.processing">{{ 'Најави се' }}
-                        </button>
-                    </div>
-                </form>
+                <div class="text-danger text-center" v-if="form.errors.credentials">{{ form.errors.credentials }}</div>
+                <div class="text-end mb-4">
+                    <Link class="text-primary fs-6 text-decoration-none">{{ 'Ја заборавивте лозинката?' }}</Link>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary text-white rounded rounded-pill px-5 py-3 mb-4"
+                            :disabled="form.processing">{{ 'Најави се' }}
+                    </button>
+                </div>
+            </form>
+            <div class="text-center mb-4 d-flex justify-content-center">
+                <div>Не сте член на EvenetsMap?</div>
+                <Link :href="route('auth.register')" class="text-primary fs-6 text-decoration-none ms-2">{{ 'Регистрирај се' }}</Link>
             </div>
         </div>
         <div class="col col-3"></div>
@@ -55,7 +58,7 @@ export default {
 
 <style scoped>
 
-.background-white{
+.background-white {
     background-color: #edf2f7;
 }
 </style>
