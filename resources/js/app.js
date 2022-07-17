@@ -4,6 +4,7 @@ import { InertiaProgress } from '@inertiajs/progress'
 import '../sass/app.scss'
 import 'bootstrap'
 import 'bootstrap/scss/bootstrap.scss'
+import 'bootstrap-icons/font/bootstrap-icons.scss'
 
 InertiaProgress.init()
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';

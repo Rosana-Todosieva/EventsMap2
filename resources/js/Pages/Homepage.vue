@@ -1,7 +1,9 @@
 <template>
-<div class="m-5">
-    <EventComponent></EventComponent>
-</div>
+    <div class="container">
+        <div class="m-3">
+            <EventComponent/>
+        </div>
+    </div>
 </template>
 
 <script>

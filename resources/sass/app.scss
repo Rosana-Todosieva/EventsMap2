@@ -53,6 +53,15 @@ $font-family-base: 'TT Commons';
     border-radius: 50px;
 }
 
+// object-fits
+.object-fit-contain {
+    object-fit: contain !important;
+}
+
+.object-fit-cover {
+    object-fit: cover !important;
+}
+
 //text-alignments
 .text-justify {
     text-align: justify;
