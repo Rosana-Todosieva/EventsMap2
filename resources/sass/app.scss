@@ -81,3 +81,9 @@ a {
     text-decoration: none !important;
     color: black;
 }
+
+//vertical text
+.text-vertical{
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}

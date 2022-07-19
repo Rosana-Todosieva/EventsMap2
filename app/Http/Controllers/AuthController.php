@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Eloquent\Model;
@@ -22,21 +23,26 @@ class AuthController extends Controller
     public function show_register(): Response
     {
         $types = User::types;
-        return Inertia::render('Auth/Register',compact('types'));
+        $cities = City::all();
+        return Inertia::render('Auth/Register', compact('types', 'cities'));
     }
 
     public function register(Request $request): RedirectResponse
     {
+        $exclude = Rule::excludeIf($request->type != User::CREATOR);
         $validated = $request->validate([
             'name' => 'required',
-            'phone'=>'required',
+            'phone' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'type' => ['required', Rule::in(User::types)]
+            'type' => ['required', Rule::in(User::types)],
+            'city_id' => [$exclude, 'required', 'exists:cities,id'],
+            'website' => [$exclude, 'nullable'],
+            'address' => [$exclude, 'required']
         ]);
         $user = new User($validated);
         $user->save();
-        $user->createCreatorIfNeeded();
+        $user->createCreatorIfNeeded($validated);
         Auth::login($user);
         event(new Registered($user));
         return redirect()->route('homepage');

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('longitude')->nullable();
             $table->string('address')->nullable();
             $table->foreignId('user_id')->constrained();
-            //city
+            $table->foreignId('city_id')->constrained();
             $table->timestamps();
         });
     }

@@ -28,13 +28,13 @@
                             <ul class="dropdown-menu end-0 " aria-labelledby="dropdownMenuButton1">
                                 <li>
                                     <Link class="dropdown-item fs-6">
-                                        <i class="fa fa-user"></i>
+                                        <i class="bi bi-person-fill"></i>
                                         My Profile
                                     </Link>
                                 </li>
                                 <li>
                                     <Link method="post" :href="route('logout')" as="button" type="button" class="dropdown-item fs-6">
-                                        <i class="fa fa-sign-out"></i>
+                                        <i class="bi bi-box-arrow-right"></i>
                                         Log Out
                                     </Link>
                                 </li>

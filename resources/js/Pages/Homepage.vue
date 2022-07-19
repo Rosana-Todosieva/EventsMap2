@@ -1,7 +1,9 @@
 <template>
-    <div class="container">
-        <div class="m-3">
-            <EventComponent/>
+    <div class="container my-4">
+        <div class="row g-4">
+            <div class="col col-12 col-lg-6" v-for="i in 10">
+                <EventComponent/>
+            </div>
         </div>
     </div>
 </template>
