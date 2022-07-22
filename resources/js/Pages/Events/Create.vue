@@ -2,8 +2,11 @@
     <div class="container p-5 my-5 bg-light border border-3 border-radius-15px">
         <div class="row g-5 align-items-start">
             <div class="col col-12 col-lg-4 border-2 border-secondary p-3 text-center" style="border-style: dashed">
-                <img class="img-fluid " src="https://st.depositphotos.com/1665366/1267/v/950/depositphotos_12676701-stock-illustration-party-background-vector-design.jpg" alt="event image">
-                <button class="btn btn-outline-secondary mt-4 mb-2">Прикачи слика</button>
+                <div class="ratio ratio-1x1">
+                    <img :src="image ? image : '/images/upload-img.png'"
+                         alt="event image" class="object-fit-cover">
+                </div>
+                <button class="btn btn-outline-secondary mt-4 mb-2" @click="openDialog">Прикачи слика</button>
             </div>
             <div class="col col-12 col-lg-8">
                 <form @submit.prevent="submit">
@@ -25,7 +28,13 @@
                 </form>
             </div>
         </div>
-
+        <input
+            type="file"
+            style="display: none"
+            ref="fileInputRef"
+            accept="image/*"
+            @change="onImagePicked"
+        />
     </div>
 </template>
 
@@ -34,16 +43,18 @@ import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import {useForm} from "@inertiajs/inertia-vue3";
 import BaseInput from "@/Components/Inputs/BaseInput.vue";
 import BaseTextarea from "@/Components/Inputs/BaseTextarea.vue";
+import {computed, ref, watch} from 'vue'
 
 export default {
     name: "Create",
     components: {BaseInput, BaseTextarea},
     layout: DefaultLayout,
     setup(props) {
+        const fileInputRef = ref(null)
         const form = useForm({
             title: '',
             date: '',
-            image: '',
+            image: null,
             price: '',
             description: '',
             time: ''
@@ -51,7 +62,24 @@ export default {
         const submit = () => {
             form.post(route('events.store'))
         }
-        return {form, submit}
+        const onImagePicked = () => {
+            const file = fileInputRef.value.files[0]
+            form.image = file
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                image.value = reader.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        const openDialog = () => {
+            fileInputRef.value.click();
+        }
+        const image = ref(null)
+
+
+        return {form, onImagePicked, submit, fileInputRef, openDialog, image}
     }
 }
 </script>

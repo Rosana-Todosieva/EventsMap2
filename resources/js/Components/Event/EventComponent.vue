@@ -3,51 +3,59 @@
         <div class="d-flex flex-column flex-md-row">
             <div class="d-flex flex-column-reverse flex-md-row" style="flex-basis: 40%">
                 <div class="bg-date text-white d-flex flex-column align-items-center justify-content-center p-1">
-                    <div class="display-4 lh-1">20</div>
-                    <div class="fs-4 fw-bold lh-1">Oct</div>
-                    <div class="fs-4 fw-bold lh-1">2022</div>
+                    <div class="display-4 lh-1">{{event.formatted_date.day}}</div>
+                    <div class="fs-4 fw-bold lh-1">{{ event.formatted_date.month }}</div>
+                    <div class="fs-4 fw-bold lh-1">{{event.formatted_date.year}}</div>
+                    <div class="fs-4 fw-bold lh-1 mt-3">{{ event.time }}</div>
                 </div>
                 <div class="ratio ratio-1x1">
                     <img
-                        src="https://st.depositphotos.com/1665366/1267/v/950/depositphotos_12676701-stock-illustration-party-background-vector-design.jpg"
+                        :src="event.image"
                         alt="event-image"
                         class="object-fit-cover">
                 </div>
             </div>
-            <div class="d-flex" style="flex-basis: 60%">
-                <div class="d-flex flex-column">
+            <div class="d-flex " style="flex-basis: 60%">
+                <div class="d-flex flex-column flex-grow-1">
                     <div class="d-flex flex-column p-2 flex-grow-1">
-                        <h2 class="fw-bold fs-3 mb-0">Charity concert</h2>
+                        <h2 class="fw-bold fs-3 mb-0">{{ event.title }}</h2>
                         <div class="d-flex justify-content-between">
                             <div class="mb-1 fs-6">
                                 <i class="bi bi-geo-alt-fill "></i>
-                                Штип
+                                {{ event.user.creator.city.name }} - {{event.user.creator.address}}
                             </div>
                             <div class="mb-1 fs-6 fw-bold">
-                                De facto
+                                {{ event.user.name }}
                             </div>
                         </div>
-                        <div class="fs-6 mt-auto"> The money raised on this concert will go to building new
-                            homeless shelters in Shtip and Skopje.
+                        <div class="fs-5 text-end mt-auto">
+                            {{event.price}} <small class="text-muted">ден.</small>
                         </div>
+                        <div class="fs-6 ">
+                            {{event.description}}
+                        </div>
+
                     </div>
                     <a href="https://www.w3schools.com/tags/tag_time.asp" @click.stop
                        class="text-center text-dark fs-5 position-relative" style="z-index:2">
-                        <div class="bg"><span class="bi bi-globe"></span> Website</div>
+                        <div class="bg"><span class="bi bi-globe"></span> {{ event.user.creator.website }}</div>
                     </a>
                 </div>
-                <div class="border-left text-vertical fs-4 lh-1 ">
+                <div class="border-left text-vertical fs-4 lh-1">
                     SOLD OUT
                 </div>
             </div>
         </div>
-        <Link href="" class="stretched-link"/>
+        <Link :href="route('events.show', event)" class="stretched-link"/>
     </div>
 </template>
 
 <script>
 export default {
-    name: "EventComponent"
+    name: "EventComponent",
+    props: {
+        event: Object
+    },
 }
 </script>
 

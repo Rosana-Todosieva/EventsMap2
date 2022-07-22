@@ -1,12 +1,16 @@
 <template>
-<div>{{event}}</div>
+    <div class="container my-3">{{ event }}</div>
 </template>
 
 <script>
+
+import DefaultLayout from "@/Layouts/DefaultLayout.vue";
+
 export default {
     name: "Show",
-    props:{
-        event:Object
+    layout: DefaultLayout,
+    props: {
+        event: Object
     }
 }
 </script>

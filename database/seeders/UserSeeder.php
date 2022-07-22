@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
             'name' => 'Creator',
             'email' => 'creator@gmail.com',
             'password' => 'creator123',
-            'phone' => '072639522'
+            'phone' => '072639522',
         ]);
         $user->save();
     }

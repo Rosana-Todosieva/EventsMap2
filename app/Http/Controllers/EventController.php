@@ -22,10 +22,18 @@ class EventController extends Controller
             'time' => 'required',
             'price' => 'required|integer|min:0',
             'description' => 'required',
-            'image' => 'nullable'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:8192'
         ]);
         $event = new Event($validated);
         $event->user()->associate($request->user());
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $uniqueFileName = uniqid() . $file->getClientOriginalName() . '.' . $file->getClientOriginalExtension();
+            $path = $file->storeAs('public/events', $uniqueFileName);
+            $event->image = $path;
+        }
+
         $event->save();
         return redirect()->route('events.show', $event);
     }

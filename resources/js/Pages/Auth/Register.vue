@@ -10,7 +10,7 @@
             </div>
             <div>
                 <form @submit.prevent="submit">
-                    <BaseInput v-model:value="form.name" label="Име и презиме" type="text" :name="'name'"
+                    <BaseInput v-model:value="form.name" label="Име" type="text" :name="'name'"
                                :error="form.errors.name" class="mb-3"/>
                     <BaseInput v-model:value="form.phone" label="Телефон" type="text" :name="'phone'"
                                :error="form.errors.phone" class="mb-3"/>
