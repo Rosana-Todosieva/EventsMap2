@@ -45,7 +45,7 @@ class AuthController extends Controller
         $user->createCreatorIfNeeded($validated);
         Auth::login($user);
         event(new Registered($user));
-        return redirect()->route('homepage');
+        return redirect()->intended(route('homepage'));
     }
 
     public function login(Request $request): RedirectResponse

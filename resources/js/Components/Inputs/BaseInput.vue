@@ -1,6 +1,6 @@
 <template>
     <div class="mb-3">
-        <label :class="{'text-white': whiteLabel}" :for="name" class="form-label">{{ label}}</label>
+        <label :for="name" class="form-label">{{ label}}</label>
         <input :type="type" class="form-control rounded-pill " :id="name" :placeholder="placeholder"
                v-model="value" :class="{'is-invalid':error}" :autofocus="autofocus">
         <div class="invalid-feedback">{{ error }}</div>

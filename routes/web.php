@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 // public routes
 Route::get('/',[HomeController::class, "homepage"])->name('homepage');
 
+
 // auth routes
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'show_register'])->name('auth.register');
@@ -31,4 +33,6 @@ Route::middleware('guest')->group(function () {
 // routes only for authenticated users
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::resource('events', EventController::class)->only('create', 'store', 'destroy', 'update', 'edit' );
 });
+Route::get('/events/{event}',[EventController::class, "show"])->name('events.show');

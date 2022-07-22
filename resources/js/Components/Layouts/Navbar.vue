@@ -10,8 +10,8 @@
                 </div >
 
                 <div class="collapse navbar-collapse">
-                    <Link :href="route('auth.register')" class="d-none d-md-flex align-items-center me-3 me-xl-4 text-decoration-none fs-5 ms-2 text-dark">
-                        <div class="custom-border-bottom">Events</div>
+                    <Link :href="route('events.create')" class="d-none d-md-flex align-items-center me-3 me-xl-4 text-decoration-none fs-5 ms-2 text-dark text-nowrap">
+                        <div class="custom-border-bottom">Create Event</div>
                     </Link>
                     <Link :href="route('auth.register')" class="d-none d-md-flex align-items-center me-3 me-xl-4 text-decoration-none fs-5 ms-2 text-dark">
                         <div class="custom-border-bottom">Creators</div>
