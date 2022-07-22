@@ -27,7 +27,7 @@
                             </button>
                             <ul class="dropdown-menu end-0 " aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    <Link class="dropdown-item fs-6">
+                                    <Link :href="route('my_profile')" class="dropdown-item fs-6">
                                         <i class="bi bi-person-fill"></i>
                                         My Profile
                                     </Link>
