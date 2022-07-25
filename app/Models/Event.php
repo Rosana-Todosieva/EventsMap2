@@ -23,7 +23,7 @@ class Event extends Model
 
     protected $casts = [
         'time' => 'datetime:H:i',
-        'date' => 'date'
+        'date' => 'date:d/m/Y'
     ];
 
     public function image(): Attribute
