@@ -41,3 +41,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/events/{event}',[EventController::class, "show"])->name('events.show');
 
 Route::get('/my_profile', [UserController::class, "my_profile"])->name('my_profile');
+
+Route::inertia('/about', "Footer/About")->name('about');
+
+Route::inertia('/contact', "Footer/Contact")->name('contact');
+
+Route::inertia('/conditions', "Footer/Conditions")->name('conditions');
+
+Route::inertia('/privacy', "Footer/Privacy")->name('privacy');
