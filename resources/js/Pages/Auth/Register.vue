@@ -75,7 +75,7 @@ export default {
         types: Array,
         cities: Array
     },
-    setup(props, ctx) {
+    setup(props) {
         const form = useForm({
             name: '',
             phone: '',
@@ -87,11 +87,7 @@ export default {
             type: null
         })
         const submit = () => {
-            form.post(route('auth.register'), {
-                onSuccess: () => {
-                    ctx.emit('onRegisterSuccess')
-                }
-            })
+            form.post(route('auth.register'))
         }
         return {form, submit}
     }

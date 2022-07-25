@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -71,8 +73,8 @@ class User extends Authenticatable
         return $this->hasOne(Creator::class);
     }
 
-    public function city(): BelongsTo
+    public function image(): Attribute
     {
-        return $this->belongsTo(City::class);
+        return Attribute::get(fn($value)=> $value ? Storage::url($value) : '/images/user.jpg');
     }
 }

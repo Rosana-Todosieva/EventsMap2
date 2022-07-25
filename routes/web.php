@@ -28,13 +28,14 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthController::class, 'show_login'])->name('auth.login');
     Route::post("/login", [AuthController::class, 'login'])->name('auth.login');
-
 });
 
 // routes only for authenticated users
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::resource('events', EventController::class)->only('create', 'store', 'destroy', 'update', 'edit' );
+    Route::put('/update-profile', [UserController::class, 'update_profile'])->name('user.update');
+    Route::get('/edit-profile', [UserController::class, 'edit_profile'])->name('user.edit');
 
 });
 Route::get('/events/{event}',[EventController::class, "show"])->name('events.show');
