@@ -31,7 +31,7 @@
                         <div class="fs-5 text-end mt-auto">
                             {{event.price}} <small class="text-muted">ден.</small>
                         </div>
-                        <div class="fs-6 ">
+                        <div class="fs-6 text-truncate-3">
                             {{event.description}}
                         </div>
 

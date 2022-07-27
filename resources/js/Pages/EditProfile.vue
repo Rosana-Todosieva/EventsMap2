@@ -51,10 +51,15 @@
                                                  :error="form.errors.website" class="mb-3"/>
                                 </div>
                                 <div v-if="user.creator">
-                                    <customInput v-model:value="form.city_id" icon="bi bi-pin-map-fill me-2"
-                                                 label="Град"
-                                                 type="text" name="city_id"
-                                                 :error="form.errors.city_id" class="mb-3"/>
+                                    <customSelect class="me-3" icon="bi bi-pin-map-fill me-2"
+                                                :error="form.errors.city_id"
+                                                v-model:value="form.city_id"
+                                                label="Град">
+                                        <option :value="null" hidden>Одбери град</option>
+                                        <option :value="city.id" v-for="city in cities" :key="city.id">
+                                            {{city.name}}
+                                        </option>
+                                    </customSelect>
                                 </div>
                             </div>
                         </div>
@@ -99,16 +104,18 @@
 <script>
 import {useForm} from "@inertiajs/inertia-vue3";
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
-import customInput from "@/Components/Inputs/customInput.vue";
-import descInput from "@/Components/Inputs/descInput.vue";
+import customInput from "@/Components/Inputs/Custom/customInput.vue";
+import descInput from "@/Components/Inputs/Custom/customTextarea.vue";
 import {computed, ref, watch} from 'vue'
+import customSelect from "@/Components/Inputs/Custom/customSelect.vue";
 
 export default {
     name: "EditProfile",
-    components: {customInput, descInput},
+    components: {customInput, descInput, customSelect},
     layout: DefaultLayout,
     props: {
         user: Object,
+        cities: Array
     },
     setup(props) {
         const fileInputRef = ref(null)

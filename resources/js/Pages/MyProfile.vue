@@ -16,7 +16,7 @@
                         </div>
                         <div class="text-center m-3">
                             <div class="d-inline-block fw-bold fs-3 text-nowrap">
-                                {{user.name}}
+                                {{ user.name }}
                             </div>
                         </div>
                     </div>
@@ -32,14 +32,14 @@
                                         <i class="bi bi-person-circle"></i>
                                         Име
                                     </div>
-                                    <div>{{user.name}}</div>
+                                    <div>{{ user.name }}</div>
                                 </div>
                                 <div class="d-flex fs-5 mb-3">
                                     <div class="text-gray me-4">
                                         <i class="bi bi-envelope-fill"></i>
                                         Маил
                                     </div>
-                                    <div>{{user.email}}</div>
+                                    <div>{{ user.email }}</div>
                                 </div>
                                 <div v-if="user.creator" class="d-flex fs-5 mb-3">
                                     <div class="text-gray me-4">
@@ -47,7 +47,7 @@
                                         Адреса
                                     </div>
                                     <div>
-                                        {{user.creator.address}}
+                                        {{ user.creator.address }}
                                     </div>
                                 </div>
                             </div>
@@ -57,22 +57,25 @@
                                         <i class="bi bi-telephone-fill"></i>
                                         Телефонски број
                                     </div>
-                                    <div>{{user.phone}}</div>
+                                    <div>{{ user.phone }}</div>
                                 </div>
                                 <div v-if="user.creator" class="d-flex fs-5 mb-3">
                                     <div class="text-gray me-4">
                                         <i class="bi bi-envelope-fill"></i>
                                         Веб страна
                                     </div>
-                                    <div><Link :href="user.creator.website"
-                                            class="text-dark">{{user.creator.website}}</Link></div>
+                                    <div>
+                                        <Link :href="user.creator.website"
+                                              class="text-dark">{{ user.creator.website }}
+                                        </Link>
+                                    </div>
                                 </div>
                                 <div v-if="user.creator" class="d-flex fs-5 mb-3">
                                     <div class="text-gray me-4">
                                         <i class="bi bi-pin-map-fill"></i>
                                         Град
                                     </div>
-                                    <div>{{user.creator.city.name}}</div>
+                                    <div>{{ user.creator.city.name }}</div>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +86,7 @@
                                     <i class="bi bi-info-circle-fill"></i>
                                     Опис
                                 </div>
-                                <div class="text-justify">{{user.creator.description}}
+                                <div class="text-justify">{{ user.creator.description }}
                                 </div>
                             </div>
                         </div>
@@ -96,7 +99,8 @@
                                 </div>
                                 <div class="border border-2 border-secondary">
                                     <ShowMap :text="`<b>${user.name}</b>`" class="mt-5"
-                                             v-if="user.creator.latitude && user.creator.longitude" :lat-lng="[user.creator.latitude, user.creator.longitude]"/>
+                                             v-if="user.creator.latitude && user.creator.longitude"
+                                             :lat-lng="[user.creator.latitude, user.creator.longitude]"/>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +112,16 @@
 
         <div v-if="user.creator" class="border-top p-3">
             <div class="fs-4 fw-bold mb-3">Мои настани</div>
-            <div class="text-center text-dark fs-5 me-2"> Моментално немате креирано настани. Можете да креирате настан <Link :href="route('events.create')"> овде</link>.
+
+            <div v-if="events.data.length" class="row">
+                <div v-for="event in events.data" :key="event.id" class="col col-12 col-lg-6 mb-4">
+                    <EventComponent :event="event"/>
+                </div>
+            </div>
+
+            <div v-else class="text-center text-dark fs-5 me-2"> Моментално немате креирано настани. Можете да креирате настан
+                <Link :href="route('events.create')"> овде</link>
+                .
             </div>
         </div>
 
@@ -131,6 +144,7 @@ export default {
     },
     props: {
         user: Object,
+        events: Object
     },
 }
 </script>

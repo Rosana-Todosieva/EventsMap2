@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
-use App\Models\User;
+use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,15 +17,20 @@ class UserController extends  Controller
     {
         $user = Auth::user();
         $user->loadMissing('creator.city');
+        $events = $user
+            ->events()
+            ->with('user.creator.city')
+            ->paginate(10);
 
-        return Inertia::render('MyProfile', compact('user'));
+        return Inertia::render('MyProfile', compact('user', 'events'));
     }
 
     public function edit_profile(): Response
     {
         $user = Auth::user();
         $user->loadMissing('creator.city');
-        return Inertia::render('EditProfile',compact('user'));
+        $cities = City::all();
+        return Inertia::render('EditProfile',compact('user', 'cities'));
     }
 
     public function update_profile(Request $request): RedirectResponse
@@ -38,7 +43,8 @@ class UserController extends  Controller
             'email' => ['required','email', Rule::unique('users')->ignoreModel($user)],
             'city_id' => [$exclude, 'required', 'exists:cities,id'],
             'website' => [$exclude, 'nullable'],
-            'address' => [$exclude, 'required']
+            'address' => [$exclude, 'required'],
+            'description' => 'nullable'
         ]);
 
         if ($request->hasFile('image')) {
@@ -58,6 +64,6 @@ class UserController extends  Controller
         $user->fill($validated);
         $user->save();
 
-        return back()->with('success', true);
+        return redirect(route('my_profile'));
     }
 }
