@@ -1,11 +1,11 @@
 <template>
-    <div class="card border-0 box-shadow bg-light text-dark position-relative">
-        <div class="d-flex flex-column flex-md-row">
+    <div class="card border-0 box-shadow bg-light text-dark position-relative h-100">
+        <div class="d-flex flex-column flex-md-row h-100">
             <div class="d-flex flex-column-reverse flex-md-row" style="flex-basis: 40%">
                 <div class="bg-date text-white d-flex flex-column align-items-center justify-content-center p-1">
-                    <div class="display-4 lh-1">{{event.formatted_date.day}}</div>
+                    <div class="display-4 lh-1">{{ event.formatted_date.day }}</div>
                     <div class="fs-4 fw-bold lh-1">{{ event.formatted_date.month }}</div>
-                    <div class="fs-4 fw-bold lh-1">{{event.formatted_date.year}}</div>
+                    <div class="fs-4 fw-bold lh-1">{{ event.formatted_date.year }}</div>
                     <div class="fs-4 fw-bold lh-1 mt-3">{{ event.time }}</div>
                 </div>
                 <div class="ratio ratio-1x1">
@@ -22,26 +22,44 @@
                         <div class="d-flex justify-content-between">
                             <div class="mb-1 fs-6">
                                 <i class="bi bi-geo-alt-fill "></i>
-                                {{ event.user.creator.city.name }} - {{event.user.creator.address}}
+                                {{ event.user.creator.city.name }} - {{ event.user.creator.address }}
                             </div>
                             <div class="mb-1 fs-6 fw-bold">
                                 {{ event.user.name }}
                             </div>
                         </div>
                         <div class="fs-5 text-end mt-auto">
-                            {{event.price}} <small class="text-muted">ден.</small>
+                            {{ event.price }} <small class="text-muted">ден.</small>
                         </div>
                         <div class="fs-6 text-truncate-3">
-                            {{event.description}}
+                            {{ event.description }}
                         </div>
 
                     </div>
-                    <a href="https://www.w3schools.com/tags/tag_time.asp" @click.stop
-                       class="text-center text-dark fs-5 position-relative" style="z-index:2">
+                    <a v-if="!mine" :href=event.user.creator.website @click.stop
+                       class="text-center text-dark fs-5 text-truncate-1 position-relative" style="z-index:2">
                         <div class="bg"><span class="bi bi-globe"></span> {{ event.user.creator.website }}</div>
                     </a>
+
+                    <div v-else class="d-flex btn-group text-center fs-6 fw-bold position-relative"
+                         style="z-index:2">
+
+                        <Link :href="route('event.sold_out', event)" :disabled="event.sold_out" method="put" type="button" as="button" class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2" >
+                            <i class="bi bi-check-circle-fill me-1"></i>
+                            Заврши
+                        </Link>
+                        <Link :href="route('events.edit', event)" :class="{'disabled': event.sold_out}" class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2"  @click.stop>
+                            <i class="bi bi-pencil-fill me-1"></i>
+                            Измени
+                        </Link>
+                        <Link :href="route('events.destroy', event)" method="delete" type="button" as="button" class="d-flex flex-grow-1 btn text-dark border-2 border rounded-0" @click.stop>
+                            <i class="bi bi-trash-fill me-1"></i>
+                            Избриши
+                        </Link>
+                    </div>
+
                 </div>
-                <div class="border-left text-vertical fs-4 lh-1">
+                <div :class="{'text-light': !event.sold_out}" class="border-left text-vertical fs-4 lh-1">
                     SOLD OUT
                 </div>
             </div>
@@ -51,11 +69,23 @@
 </template>
 
 <script>
+import {Inertia} from "@inertiajs/inertia";
+
 export default {
     name: "EventComponent",
     props: {
-        event: Object
+        event: Object,
+        mine: {
+            Type: Boolean,
+            Default:false
+        }
     },
+    setup(props){
+        const soldOut = () => {
+            Inertia.put(route('event.sold_out', props.event.id))
+        }
+        return {soldOut}
+    }
 }
 </script>
 

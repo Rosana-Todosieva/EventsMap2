@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('date');
             $table->time('time');
             $table->string('image')->nullable();
+            $table->boolean('sold_out')->default(false);
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

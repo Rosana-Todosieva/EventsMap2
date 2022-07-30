@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('events', EventController::class)->only('create', 'store', 'destroy', 'update', 'edit' );
     Route::put('/update-profile', [UserController::class, 'update_profile'])->name('user.update');
     Route::get('/edit-profile', [UserController::class, 'edit_profile'])->name('user.edit');
+    Route::put('/events/{event}/sold_out', [EventController::class, 'sold_out'])->name('event.sold_out');
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('/events/{event}/update', [EventController::class, 'update'])->name('event.update');
 
 });
 Route::get('/events/{event}',[EventController::class, "show"])->name('events.show');

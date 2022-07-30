@@ -115,7 +115,7 @@
 
             <div v-if="events.data.length" class="row">
                 <div v-for="event in events.data" :key="event.id" class="col col-12 col-lg-6 mb-4">
-                    <EventComponent :event="event"/>
+                    <EventComponent :event="event" :mine="true"/>
                 </div>
             </div>
 
