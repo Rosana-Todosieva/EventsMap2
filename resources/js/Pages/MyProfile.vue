@@ -124,7 +124,8 @@
                 .
             </div>
         </div>
-
+    <DeleteEventModal/>
+    <MarkSoldOutEventModal/>
     </div>
 </template>
 
@@ -133,11 +134,15 @@ import EventComponent from "@/Components/Event/EventComponent.vue";
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import PickLocationMap from "@/Components/PickLocationMap.vue";
 import ShowMap from "@/Components/ShowMap.vue";
+import DeleteEventModal from "@/Components/Modals/DeleteEventModal.vue";
+import MarkSoldOutEventModal from "@/Components/Modals/MarkSoldOutEventModal.vue";
 
 export default {
     name: "MyProfile",
     layout: DefaultLayout,
     components: {
+        MarkSoldOutEventModal,
+        DeleteEventModal,
         EventComponent,
         PickLocationMap,
         ShowMap

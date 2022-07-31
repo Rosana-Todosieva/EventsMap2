@@ -44,18 +44,23 @@
                     <div v-else class="d-flex btn-group text-center fs-6 fw-bold position-relative"
                          style="z-index:2">
 
-                        <Link :href="route('event.sold_out', event)" :disabled="event.sold_out" method="put" type="button" as="button" class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2" >
+                        <Link :href="route('event.sold_out', event)" :disabled="event.sold_out" method="put"
+                              type="button" as="button"
+                              class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2">
                             <i class="bi bi-check-circle-fill me-1"></i>
                             Заврши
                         </Link>
-                        <Link :href="route('events.edit', event)" :class="{'disabled': event.sold_out}" class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2"  @click.stop>
+                        <Link :href="route('events.edit', event)" :class="{'disabled': event.sold_out}"
+                              class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2" @click.stop>
                             <i class="bi bi-pencil-fill me-1"></i>
                             Измени
                         </Link>
-                        <Link :href="route('events.destroy', event)" method="delete" type="button" as="button" class="d-flex flex-grow-1 btn text-dark border-2 border rounded-0" @click.stop>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#delete-event-modal"
+                                :data-bs-event="JSON.stringify(event)"
+                                class="d-flex flex-grow-1 btn text-dark border-2 border rounded-0" @click.stop>
                             <i class="bi bi-trash-fill me-1"></i>
                             Избриши
-                        </Link>
+                        </button>
                     </div>
 
                 </div>
@@ -77,10 +82,10 @@ export default {
         event: Object,
         mine: {
             Type: Boolean,
-            Default:false
+            Default: false
         }
     },
-    setup(props){
+    setup(props) {
         const soldOut = () => {
             Inertia.put(route('event.sold_out', props.event.id))
         }

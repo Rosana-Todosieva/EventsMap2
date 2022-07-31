@@ -75,6 +75,11 @@ class EventController extends Controller
 
     }
 
+    public function destroy(Event $event){
+        $event->delete();
+        return redirect()->back();
+    }
+
     public function sold_out(Event $event){
         $event->sold_out = true;
         $event->save();
