@@ -44,12 +44,13 @@
                     <div v-else class="d-flex btn-group text-center fs-6 fw-bold position-relative"
                          style="z-index:2">
 
-                        <Link :href="route('event.sold_out', event)" :disabled="event.sold_out" method="put"
-                              type="button" as="button"
+                        <button data-bs-toggle="modal" data-bs-target="#soldout-event-modal"
+                              :data-bs-event="JSON.stringify(event)" :class="{'disabled': event.sold_out}"
+                              type="button"
                               class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2">
                             <i class="bi bi-check-circle-fill me-1"></i>
                             Заврши
-                        </Link>
+                        </button>
                         <Link :href="route('events.edit', event)" :class="{'disabled': event.sold_out}"
                               class="rounded-0 d-flex flex-grow-1 btn text-dark border border-2" @click.stop>
                             <i class="bi bi-pencil-fill me-1"></i>
@@ -57,7 +58,7 @@
                         </Link>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#delete-event-modal"
                                 :data-bs-event="JSON.stringify(event)"
-                                class="d-flex flex-grow-1 btn text-dark border-2 border rounded-0" @click.stop>
+                                class="d-flex flex-grow-1 btn text-dark border-2 border rounded-0">
                             <i class="bi bi-trash-fill me-1"></i>
                             Избриши
                         </button>
@@ -84,12 +85,6 @@ export default {
             Type: Boolean,
             Default: false
         }
-    },
-    setup(props) {
-        const soldOut = () => {
-            Inertia.put(route('event.sold_out', props.event.id))
-        }
-        return {soldOut}
     }
 }
 </script>

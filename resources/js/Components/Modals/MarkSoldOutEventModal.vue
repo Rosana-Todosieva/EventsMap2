@@ -15,7 +15,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Исклучи</button>
-                    <button :disabled="disabled" @click="soldoutEvent"
+                    <button :disabled="disabled" @click="soldOutEvent"
                             class="btn btn-danger text-white">
                         Заврши настан
                     </button>
@@ -44,8 +44,8 @@ export default {
                 event.value = JSON.parse(button.getAttribute('data-bs-event'))
             })
         })
-        const soldoutEvent = ()=> {
-            Inertia.put(route('event.sold_out', event.value), {
+        const soldOutEvent = ()=> {
+            Inertia.put(route('event.sold_out', event.value), null, {
                 onBefore: () => {
                     disabled.value = true
                 },
@@ -55,7 +55,7 @@ export default {
                 }
             })
         }
-        return  {modalRef, soldoutEvent, event, disabled}
+        return  {modalRef, soldOutEvent, event, disabled}
     }
 }
 </script>
