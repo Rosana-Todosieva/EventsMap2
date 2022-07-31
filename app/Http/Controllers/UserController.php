@@ -44,7 +44,9 @@ class UserController extends  Controller
             'city_id' => [$exclude, 'required', 'exists:cities,id'],
             'website' => [$exclude, 'nullable'],
             'address' => [$exclude, 'required'],
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'latitude' => 'nullable|numeric',
+            'longitude' => 'nullable|numeric',
         ]);
 
         if ($request->hasFile('image')) {

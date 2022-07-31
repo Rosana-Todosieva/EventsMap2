@@ -42,6 +42,9 @@
                     </div>
                 </div>
                 <br/>
+                <ShowMap :text="`<b>${event.user.name}</b>`" class="mt-5"
+                         v-if="event.user.creator.latitude && event.user.creator.longitude"
+                         :lat-lng="[event.user.creator.latitude, event.user.creator.longitude]"/>
                 <br/>
                 <div class="float-end mt-3">
                     <button class="btn btn-secondary m-2 px-5">Купи билет</button>
@@ -55,9 +58,11 @@
 <script>
 
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
+import ShowMap from "@/Components/ShowMap.vue";
 
 export default {
     name: "Show",
+    components: {ShowMap},
     layout: DefaultLayout,
     props: {
         event: Object

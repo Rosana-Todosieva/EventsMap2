@@ -52,12 +52,12 @@
                                 </div>
                                 <div v-if="user.creator">
                                     <customSelect class="me-3" icon="bi bi-pin-map-fill me-2"
-                                                :error="form.errors.city_id"
-                                                v-model:value="form.city_id"
-                                                label="Град">
+                                                  :error="form.errors.city_id"
+                                                  v-model:value="form.city_id"
+                                                  label="Град">
                                         <option :value="null" hidden>Одбери град</option>
                                         <option :value="city.id" v-for="city in cities" :key="city.id">
-                                            {{city.name}}
+                                            {{ city.name }}
                                         </option>
                                     </customSelect>
                                 </div>
@@ -77,16 +77,16 @@
                                     Изберете ја вашата локација
                                 </div>
                                 <div class="border border-2 border-secondary">
-                                    <!--                                    <ShowMap :text="`<b>${user.name}</b>`" class="mt-5"-->
-                                    <!--                                             v-if="user.creator.latitude && user.creator.longitude" :lat-lng="[user.creator.latitude, user.creator.longitude]"/>-->
+                                    <PickLocationMap :value="[form.latitude, form.longitude]" @update="updateLocation"/>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="text-end mb-3 mb-md-2">
-                    <button class="btn btn-outline-secondary px-2">Зачувај податоци</button>
+                    <div class="text-end mb-3 mb-md-2">
+                        <button class="btn btn-outline-secondary px-2">Зачувај податоци</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -108,10 +108,11 @@ import customInput from "@/Components/Inputs/Custom/customInput.vue";
 import descInput from "@/Components/Inputs/Custom/customTextarea.vue";
 import {computed, ref, watch} from 'vue'
 import customSelect from "@/Components/Inputs/Custom/customSelect.vue";
+import PickLocationMap from "@/Components/PickLocationMap.vue";
 
 export default {
     name: "EditProfile",
-    components: {customInput, descInput, customSelect},
+    components: {PickLocationMap, customInput, descInput, customSelect},
     layout: DefaultLayout,
     props: {
         user: Object,
@@ -128,12 +129,14 @@ export default {
                 website: props.user.creator.website,
                 city_id: props.user.creator.city_id,
                 description: props.user.creator.description,
+                latitude: props.user.creator.latitude,
+                longitude: props.user.creator.longitude
             } : {}),
             image: null,
-            _method:'PUT'
+            _method: 'PUT'
         })
         const submit = () => {
-            form.post(route('user.update'), )
+            form.post(route('user.update'),)
         }
         const onImagePicked = () => {
             const file = fileInputRef.value.files[0]
@@ -149,8 +152,12 @@ export default {
         const openDialog = () => {
             fileInputRef.value.click();
         }
+        const updateLocation = (location) => {
+            form.latitude = location[0]
+            form.longitude = location[1]
+        }
         const image = ref(null)
-        return {form, onImagePicked, submit, fileInputRef, openDialog, image}
+        return {form, onImagePicked, submit, fileInputRef, openDialog, image, updateLocation}
     }
 }
 </script>

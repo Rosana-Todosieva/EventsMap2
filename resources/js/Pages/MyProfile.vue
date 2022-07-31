@@ -97,11 +97,9 @@
                                     <i class="bi bi-geo-alt-fill"></i>
                                     Вашата локација
                                 </div>
-                                <div class="border border-2 border-secondary">
-                                    <ShowMap :text="`<b>${user.name}</b>`" class="mt-5"
-                                             v-if="user.creator.latitude && user.creator.longitude"
-                                             :lat-lng="[user.creator.latitude, user.creator.longitude]"/>
-                                </div>
+                                <ShowMap :text="`<b>${user.name}</b>`"
+                                         v-if="user.creator.latitude && user.creator.longitude"
+                                         :lat-lng="[user.creator.latitude, user.creator.longitude]"/>
                             </div>
                         </div>
                     </div>
@@ -119,13 +117,14 @@
                 </div>
             </div>
 
-            <div v-else class="text-center text-dark fs-5 me-2"> Моментално немате креирано настани. Можете да креирате настан
+            <div v-else class="text-center text-dark fs-5 me-2"> Моментално немате креирано настани. Можете да креирате
+                настан
                 <Link :href="route('events.create')"> овде</link>
                 .
             </div>
         </div>
-    <DeleteEventModal/>
-    <MarkSoldOutEventModal/>
+        <DeleteEventModal/>
+        <MarkSoldOutEventModal/>
     </div>
 </template>
 
