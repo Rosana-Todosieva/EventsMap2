@@ -2,7 +2,7 @@
     <div>
         <label v-if="label" :for="name" class="form-label">{{ label }}</label>
         <select class="form-control rounded-pill " :id="name" v-model="value" :class="{'is-invalid':error}"
-                :disabled="disabled">
+                :disabled="disabled" @change="$emit('change')">
             <slot></slot>
         </select>
         <div class="invalid-feedback">{{ error }}</div>
@@ -14,6 +14,7 @@ import {computed} from "vue";
 
 export default {
     name: "BaseSelect",
+    emits:['change'],
     props: {
         label: {
             type: String
