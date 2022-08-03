@@ -21,7 +21,9 @@
                         <div class="dropdown">
                             <button class="btn dropdown-toggle fs-5 text-dark" type="button" id="dropdownMenuButton2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="https://i.ibb.co/tqJ38n3/user.png" alt="user" width="32" height="32"
+                                <img v-if="user.image" :src="user.image" alt="user" width="32" height="32"
+                                     class="rounded rounded-circle me-1 object-fit-contain">
+                                <img v-else src="https://i.ibb.co/tqJ38n3/user.png" alt="user" width="32" height="32"
                                      class="rounded rounded-circle me-1">
                                 {{ user.name }}
                             </button>
