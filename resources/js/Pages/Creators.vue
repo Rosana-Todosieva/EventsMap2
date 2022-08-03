@@ -5,14 +5,19 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media align-items-center"> <div class="ratio ratio-1x1">
-                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/FK_Vardar_logo.svg/1200px-FK_Vardar_logo.svg.png" class="object-fit-cover img-thumbnail">
+                            <img :src="user.image" class="object-fit-cover img-thumbnail" alt="user-image">
                         </div>
                             <div class="media-body overflow-hidden">
-                                <h5 class="card-text mb-0">ФК Вардар</h5>
-                                <p class="card-text text-uppercase text-muted">Скопје, 4ти март, бб</p>
+                                <h5 class="card-text mb-0">{{user.name}}</h5>
+                                <p class="card-text text-uppercase text-muted">{{ user.creator.city_id }} - {{user.creator.address}}</p>
                                 <p class="card-text">
-                                    nielsencobb@memora.com<br><abbr title="Phone">P:  </abbr>+1 (851) 552-2735
+                                    {{user.email}}<br><abbr title="Phone"></abbr>{{user.phone}}
                                 </p>
+                                <div>
+                                    <Link :href="user.creator.website"
+                                          class="text-dark">{{ user.creator.website }}
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -32,7 +37,7 @@ export default {
     components: {EventComponent},
     props: {
         user: Object,
-        events: Object
+        event: Object
     },
 }
 </script>
