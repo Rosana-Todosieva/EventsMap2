@@ -1,5 +1,6 @@
 <template>
-    <form @submit.prevent="submit" class="border bg-light m-3 p-3">
+    <div class="d-flex justify-content-center">
+    <form @submit.prevent="submit" class="border bg-light m-3 px-5">
 
         <BaseInput label="Име" type="text" class="mb-3"/>
         <BaseInput label="Маил" type="text" class="mb-3"/>
@@ -15,7 +16,7 @@
 
         <div> Исто така, може да не контактирате на нашата 24/7 сервисна линија : 022 345 789</div>
 
-    </form>
+    </form></div>
 </template>
 
 <script>
