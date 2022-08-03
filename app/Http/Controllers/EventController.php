@@ -46,7 +46,7 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-        $event->loadMissing('user.creator');
+        $event->loadMissing('user.creator.city');
         return Inertia::render('Events/Show', compact('event'));
     }
 
