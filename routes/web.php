@@ -5,6 +5,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CreatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/events/{event}',[EventController::class, "show"])->name('events.show');
 
 Route::get('/my_profile', [UserController::class, "my_profile"])->name('my_profile');
+
+Route::get('/creators', [CreatorController::class, "creators"])->name('creators');
 
 Route::inertia('/about', "Footer/About")->name('about');
 

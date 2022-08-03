@@ -6,8 +6,11 @@
                     <div class="fs-6 fw-bold mb-2">
                         {{(group.name)}}
                     </div>
-                    <div class="fs-6" v-for="(item, i) in group.items" :key="i">
-                        {{(item)}}
+                    <div class="fs-6 d-flex flex-column">
+                        <Link :href="route('conditions')">Услови на користење </Link>
+                        <Link :href="route('privacy')">Политика на приватност </Link>
+                        <Link :href="route('about')">За нас </Link>
+                        <Link :href="route('contact')">Контакт </Link>
                     </div>
                 </div>
                 <Link :href="route('homepage')" class="col d-flex justify-content-sm-center text-dark justify-content-md-end align-items-center">
@@ -26,13 +29,7 @@ export default {
         return {
             groups: [
                 {
-                    name: "EventsMap",
-                    items: [
-                        "Услови на користење",
-                        "Политика на приватност",
-                        "За нас",
-                        "Контакт",
-                    ]
+                    name: "EventsMap"
                 }
             ]
         }
