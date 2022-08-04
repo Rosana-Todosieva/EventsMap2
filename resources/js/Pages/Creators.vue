@@ -11,7 +11,7 @@
                                 <h5 class="card-text mb-0">{{creator.user.name}}</h5>
                                 <p class="card-text text-uppercase text-muted">{{ creator.city.name }} - {{creator.address}}</p>
                                 <p class="card-text">
-                                    {{creator.user.email}}<br><abbr title="Phone"></abbr>{{creator.user.phone}}
+                                    <a :href="'mailto:'+creator.user.email" class="fs-5 text-dark">{{ creator.user.email }}</a><br><abbr title="Phone"></abbr> <a :href="'tel:'+creator.user.phone" class="fs-5 text-dark">{{ creator.user.phone }}</a>
                                 </p>
                                 <div>
                                     <Link :href="creator.website"

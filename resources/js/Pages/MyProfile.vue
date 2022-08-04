@@ -39,7 +39,7 @@
                                         <i class="bi bi-envelope-fill"></i>
                                         Маил
                                     </div>
-                                    <div>{{ user.email }}</div>
+                                    <a :href="'mailto:'+user.email" class="fs-5 text-dark">{{ user.email }}</a>
                                 </div>
                                 <div v-if="user.creator" class="d-flex fs-5 mb-3">
                                     <div class="text-gray me-4">
@@ -57,7 +57,7 @@
                                         <i class="bi bi-telephone-fill"></i>
                                         Телефонски број
                                     </div>
-                                    <div>{{ user.phone }}</div>
+                                    <a :href="'tel:'+user.phone" class="fs-5 text-dark">{{ user.phone }}</a>
                                 </div>
                                 <div v-if="user.creator" class="d-flex fs-5 mb-3">
                                     <div class="text-gray me-4">
