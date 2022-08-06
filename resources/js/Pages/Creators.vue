@@ -1,6 +1,9 @@
 <template>
     <div class="container py-3">
         <div class="my-3 d-flex align-items-center justify-content-end">
+            <div class="me-5">
+                    <BaseInput v-model:value="form.name" @change="search" type="search" label="Барај по име" class="rounded px-1" />
+            </div>
                 <BaseSelect class="mb-4"
                             v-model:value="form.city_id"
                             label="Град"
@@ -82,6 +85,7 @@ import BaseSelect from "@/Components/Inputs/BaseSelect.vue";
 import EventComponent from "@/Components/Event/EventComponent.vue";
 import {getParam} from "../functions.js";
 import {useForm} from "@inertiajs/inertia-vue3";
+import BaseInput from "@/Components/Inputs/BaseInput.vue";
 
 export default {
     name: "Creators",
@@ -91,11 +95,13 @@ export default {
         cities: Array
     },
     components: {
+        BaseInput,
         ShowMap, BaseSelect, EventComponent
     },
     setup() {
         const form = useForm({
-            city_id: getParam('city_id')
+            city_id: getParam('city_id'),
+            name: getParam('name')
         })
         const  search = () => {
             form.cancel()
