@@ -1,5 +1,17 @@
 <template>
     <div class="container py-3">
+        <div class="my-3 d-flex align-items-center justify-content-end">
+                <BaseSelect class="mb-4"
+                            v-model:value="form.city_id"
+                            label="Град"
+                            @change="search">
+                    <option selected :value="null" hidden>Одбери град</option>
+                    <option :value="null">Сите градови</option>
+                    <option :value="city.id" v-for="city in cities" :key="city.id">
+                        {{ city.name }}
+                    </option>
+                </BaseSelect>
+            </div>
         <div class="card float-right m-2 bg-light" v-for="creator in creators" :key="creator.id">
             <div class="row m-2 ">
                 <div class="col-sm-5">
@@ -57,21 +69,39 @@
 
         <br>
         <br>
+        <div class="col text-center my-5 fs-4" v-if="!creators.length">
+            Нема креатори кои што одговараат на вашето пребарување.
+        </div>
     </div>
 </template>
 
 <script>
 import DefaultLayout from "@/Layouts/DefaultLayout.vue";
 import ShowMap from "@/Components/ShowMap.vue";
+import BaseSelect from "@/Components/Inputs/BaseSelect.vue";
+import EventComponent from "@/Components/Event/EventComponent.vue";
+import {getParam} from "../functions.js";
+import {useForm} from "@inertiajs/inertia-vue3";
 
 export default {
     name: "Creators",
     layout: DefaultLayout,
     props: {
         creators: Array,
+        cities: Array
     },
     components: {
-        ShowMap
+        ShowMap, BaseSelect, EventComponent
+    },
+    setup() {
+        const form = useForm({
+            city_id: getParam('city_id')
+        })
+        const  search = () => {
+            form.cancel()
+            form.get(route('creators'))
+        }
+        return {form, search}
     }
 }
 </script>
